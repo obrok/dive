@@ -1,16 +1,27 @@
+love = require "love"
+
 export newGame = () ->
-  {characterX: 0, characterY: 0}
+  tileset = love.graphics.newImage('tiles.png')
 
-export loveDraw = () ->
-  love.graphics.draw(Tileset, Floor, 300, 300)
-  love.graphics.draw(Tileset, Dude, 32 * Game.characterX, 32 * Game.characterY)
+  tileSize = 32
+  tilesetWidth, tilesetHeight = tileset\getWidth(), tileset\getHeight()
 
-export loveKeyreleased = (key) ->
+  dude = love.graphics.newQuad(4 * tileSize, 2 * tileSize, tileSize, tileSize, tilesetWidth, tilesetHeight)
+  floor = love.graphics.newQuad(14 * tileSize, 17 * tileSize, tileSize, tileSize, tilesetWidth, tilesetHeight)
+
+  {characterX: 0, characterY: 0, dude: dude, floor: floor, tileset: tileset}
+
+export loveDraw = (game) ->
+  love.graphics.draw(game.tileset, game.floor, 300, 300)
+  love.graphics.draw(game.tileset, game.dude, 32 * game.characterX, 32 * game.characterY)
+
+export loveKeyreleased = (game, key) ->
+  p(key)
   if key == 'left' then
-    Game.characterX = Game.characterX - 1
+    game.characterX = game.characterX - 1
   elseif key == 'right' then
-    Game.characterX = Game.characterX + 1
+    game.characterX = game.characterX + 1
   elseif key == 'down' then
-    Game.characterY = Game.characterY + 1
+    game.characterY = game.characterY + 1
   elseif key == 'up' then
-    Game.characterY = Game.characterY - 1
+    game.characterY = game.characterY - 1

@@ -1,7 +1,7 @@
 start: build
 	/Applications/love.app/Contents/MacOS/love build
 
-build: clean copy_moon copy_lua copy_assets
+build: clean copy_lua copy_moon copy_assets
 
 copy_assets:
 	cp assets/* build/

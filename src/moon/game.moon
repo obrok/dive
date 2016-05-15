@@ -16,12 +16,8 @@ export loveDraw = (game) ->
   love.graphics.draw(game.tileset, game.dude, 32 * game.characterX, 32 * game.characterY)
 
 export loveKeyreleased = (game, key) ->
-  p(key)
-  if key == 'left' then
-    game.characterX = game.characterX - 1
-  elseif key == 'right' then
-    game.characterX = game.characterX + 1
-  elseif key == 'down' then
-    game.characterY = game.characterY + 1
-  elseif key == 'up' then
-    game.characterY = game.characterY - 1
+  switch key
+    when "left" then game.characterX -= 1
+    when "right" then game.characterX += 1
+    when "up" then game.characterY -= 1
+    when "down" then game.characterY += 1
